@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой Бэкенд Сайт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Шапка сайта находится внутри body -->
+<header class="site-header">
+    <button class="logo" data-text="Awesome">
+        <span class="actual-text">&nbsp;vstu&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;vstu&nbsp;</span>
+    </button>
+
+    <!-- Здесь также можно разместить меню навигации -->
+    <button class="styled-button">
+        Register Now
+        <div class="inner-button">
+            <svg
+                    id="Arrow"
+                    viewBox="0 0 32 32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="30px"
+                    width="30px"
+                    class="icon"
+            >
+                <defs>
+                    <linearGradient y2="100%" x2="100%" y1="0%" x1="0%" id="iconGradient">
+                        <stop style="stop-color:#FFFFFF;stop-opacity:1" offset="0%"></stop>
+                        <stop style="stop-color:#AAAAAA;stop-opacity:1" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <path
+                        fill="url(#iconGradient)"
+                        d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"
+                ></path>
+            </svg>
+        </div>
+    </button>
+
+</header>
+<!--    <div class="card">-->
+<!--        <h3 class="txt">Отправить данные</h3>-->
+<!--        <input class="inptxt" type="text" id="сaesar_cipher_input" placeholder="Введите текст...">-->
+<!--        <input class="inpval" type="text" id="сaesar_cipher_val" placeholder="Введите значение...">-->
+<!--        <button onclick="sendData()">Отправить на сервер</button>-->
+<!--        <p class="message" id="сaesar_cipher_response"></p>-->
+<!--    </div>-->
+<div class="scene">
+
+    <!-- 1. Шифр Цезаря -->
+    <div class="card" id="card1">
+        <div class="face front">
+            <div class="imge">
+                <div class="Usericon"></div>
+                <div class="UserName"></div>
+                <div class="Id"></div>
+            </div>
+            <div class="body">
+                <input class="inp" id="c1_text" type="text" placeholder="Введите текст..." oninput="caesar()">
+                <input class="inp" id="c1_shift" type="number" placeholder="Сдвиг (число)..." oninput="caesar()">
+                <div class="output-box">
+                    <div class="output-label">Результат</div>
+                    <div class="output-text" id="c1_out">Заполните поля выше...</div>
+                </div>
+                <button class="flip-btn" onclick="flip('card1', true)">Описание →</button>
+                <button class="flip-btn" onclick="sendToServer(1)">Отправить →</button>
+            </div>
+        </div>
+        <div class="face back">
+            <div class="back-body">
+                <div class="back-title">Шифр Цезаря</div>
+                <textarea class="desc-area" readonly>Каждая буква сдвигается на N позиций в алфавите. Например, при сдвиге 3: A → D, B → E. Один из древнейших шифров, использовался Юлием Цезарем.</textarea>
+                <button class="flip-btn" style="margin-top:12px" onclick="flip('card1', false)">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Шифр транспонирования -->
+    <div class="card" id="card2">
+        <div class="face front">
+            <div class="imge">
+                <div class="Usericon"></div>
+                <div class="UserName"></div>
+                <div class="Id"></div>
+            </div>
+            <div class="body">
+                <input class="inp" id="c2_text" type="text" placeholder="Введите текст..." oninput="transposition()">
+                <input class="inp" id="c2_cols" type="number" placeholder="Кол-во столбцов..." oninput="transposition()">
+                <div class="output-box">
+                    <div class="output-label">Результат</div>
+                    <div class="output-text" id="c2_out">Заполните поля выше...</div>
+                </div>
+                <button class="flip-btn" onclick="flip('card2', true)">Описание →</button>
+                <button class="flip-btn" onclick="sendToServer(2)">Отправить →</button>
+            </div>
+        </div>
+        <div class="face back">
+            <div class="back-body">
+                <div class="back-title">Шифр транспонирования</div>
+                <textarea class="desc-area" readonly>Текст записывается в таблицу по строкам, а считывается по столбцам. Порядок букв меняется, но сами буквы остаются прежними.</textarea>
+                <button class="flip-btn" style="margin-top:12px" onclick="flip('card2', false)">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Шифр Виженера -->
+    <div class="card" id="card3">
+        <div class="face front">
+            <div class="imge">
+                <div class="Usericon"></div>
+                <div class="UserName"></div>
+                <div class="Id"></div>
+            </div>
+            <div class="body">
+                <input class="inp" id="c3_text" type="text" placeholder="Введите текст..." oninput="vigenere()">
+                <input class="inp" id="c3_key" type="text" placeholder="Ключевое слово..." oninput="vigenere()">
+                <div class="output-box">
+                    <div class="output-label">Результат</div>
+                    <div class="output-text" id="c3_out">Заполните поля выше...</div>
+                </div>
+                <button class="flip-btn" onclick="flip('card3', true)">Описание →</button>
+                <button class="flip-btn" onclick="sendToServer(3)">Отправить →</button>
+            </div>
+        </div>
+        <div class="face back">
+            <div class="back-body">
+                <div class="back-title">Шифр Виженера</div>
+                <textarea class="desc-area" readonly>Улучшение шифра Цезаря: сдвиг для каждой буквы задаётся ключевым словом. Например, ключ "KEY" даёт сдвиги 10, 4, 24 для каждой следующей буквы.</textarea>
+                <button class="flip-btn" style="margin-top:12px" onclick="flip('card3', false)">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Шифр A1Z26 -->
+    <div class="card" id="card4">
+        <div class="face front">
+            <div class="imge">
+                <div class="Usericon"></div>
+                <div class="UserName"></div>
+                <div class="Id"></div>
+            </div>
+            <div class="body">
+                <input class="inp" id="c4_text" type="text" placeholder="Введите текст..." oninput="a1z26()">
+                <input class="inp" id="c4_sep" type="text" placeholder="Разделитель (напр. -)" oninput="a1z26()">
+                <div class="output-box">
+                    <div class="output-label">Результат</div>
+                    <div class="output-text" id="c4_out">Заполните поля выше...</div>
+                </div>
+                <button class="flip-btn" onclick="flip('card4', true)">Описание →</button>
+                <button class="flip-btn" onclick="sendToServer(4)">Отправить →</button>
+            </div>
+        </div>
+        <div class="face back">
+            <div class="back-body">
+                <div class="back-title">Шифр A1Z26</div>
+                <textarea class="desc-area" readonly>Каждая буква заменяется её порядковым номером в алфавите: A=1, B=2, ..., Z=26. Например, "CAT" → "3-1-20".</textarea>
+                <button class="flip-btn" style="margin-top:12px" onclick="flip('card4', false)">← Назад</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
